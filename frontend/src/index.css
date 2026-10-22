@@ -1,0 +1,64 @@
+body{
+
+    margin:0;
+
+    background:#f1f5f9;
+
+    font-family:
+
+    Arial, sans-serif;
+
+}
+
+
+button{
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 20px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+button:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+textarea{
+
+    width:90%;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    border:1px solid #cbd5e1;
+
+    font-size:16px;
+
+}
+
+
+input{
+
+    margin:10px 0;
+
+}
+
+
+h2{
+
+    color:#1e293b;
+
+}

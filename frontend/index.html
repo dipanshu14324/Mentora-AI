@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+Mentora AI Tutor
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
+
+
+<!-- Markdown -->
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+
+
+
+<!-- MathJax -->
+
+<script>
+
+window.MathJax = {
+
+    tex:{
+        inlineMath:[
+            ['$', '$'],
+            ['\\(', '\\)']
+        ]
+    }
+
+};
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+
+<!-- Highlight Code -->
+
+<link 
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+
+
+</head>
+
+
+
+
+
+<body>
+
+
+
+<div class="app">
+
+
+
+
+
+<!-- =========================
+        SIDEBAR
+========================= -->
+
+
+<div class="sidebar">
+
+
+
+<h2>
+🧠 Mentora
+</h2>
+
+
+
+<button id="newChat">
+
++ New Chat
+
+</button>
+
+
+
+
+
+<h3>
+📚 Study Material
+</h3>
+
+
+
+
+<input
+
+type="file"
+
+id="pdfFile"
+
+accept=".pdf"
+
+>
+
+
+
+
+<button id="uploadBtn">
+
+Upload PDF
+
+</button>
+
+
+
+<p id="uploadStatus">
+
+</p>
+
+
+
+
+
+<button id="flashBtn">
+
+🃏 Generate Flashcards
+
+</button>
+
+
+
+
+
+
+<h3>
+
+Previous Chats
+
+</h3>
+
+
+
+<div id="history">
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =========================
+        MAIN CHAT
+========================= -->
+
+
+<div class="chat-container">
+
+
+
+
+
+
+<!-- =========================
+        SINGLE SCROLL AREA
+
+        Everything scrolls here
+========================= -->
+
+
+<div id="chat-scroll">
+
+
+
+
+
+<!-- CHAT MESSAGES -->
+
+<div id="messages">
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =========================
+        LEARNING AREA
+========================= -->
+
+<div id="learningArea">
+
+
+    <!-- =========================
+            FLASHCARD AREA
+    ========================= -->
+
+
+    <section id="flash-section">
+
+
+        <h2 class="section-title">
+            🃏 Flashcards
+        </h2>
+
+
+        <div id="flashcards">
+
+            <!-- Flashcards will be inserted here by JS -->
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- =========================
+            QUIZ AREA
+    ========================= -->
+
+
+    <section id="quiz-section">
+
+
+        <h2 class="section-title">
+            📝 Quiz
+        </h2>
+
+
+        <div id="quizBox">
+
+            <!-- Quiz questions will be inserted here -->
+
+        </div>
+
+
+    </section>
+
+
+</div>
+
+
+
+<!-- =========================
+        INPUT AREA
+        FIXED BOTTOM
+========================= -->
+
+
+
+<div class="input-area">
+
+
+
+
+
+
+<div class="settings">
+
+
+
+<select id="level">
+
+
+<option value="Beginner">
+
+Beginner
+
+</option>
+
+
+
+<option value="Intermediate">
+
+Intermediate
+
+</option>
+
+
+
+<option value="Advanced">
+
+Advanced
+
+</option>
+
+
+</select>
+
+
+
+
+
+
+<select id="style">
+
+
+
+<option value="Concept Learning">
+
+Concept Learning
+
+</option>
+
+
+
+<option value="Exam Preparation">
+
+Exam Preparation
+
+</option>
+
+
+
+<option value="Interview Preparation">
+
+Interview Preparation
+
+</option>
+
+
+
+<option value="Quick Revision">
+
+Quick Revision
+
+</option>
+
+
+
+</select>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<input
+
+id="question"
+
+placeholder="Ask anything..."
+
+>
+
+
+
+
+
+
+
+<button id="send">
+
+Send
+
+</button>
+
+
+
+
+
+
+<button id="quizBtn">
+
+📝 Generate Quiz
+
+</button>
+
+
+
+
+
+
+<button id="stop">
+
+Stop
+
+</button>
+
+
+
+
+
+
+<button id="mic">
+
+🎤 Ask Mentora
+
+</button>
+
+
+
+
+
+
+
+<div id="voiceStatus">
+
+🟢 Ready
+
+</div>
+
+
+
+
+
+
+<audio id="audioPlayer">
+
+</audio>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+<script>
+
+window.onload = function(){
+
+    console.log(
+        "Flashcard Box:",
+        document.getElementById("flashcards")
+    );
+
+
+    console.log(
+        "Quiz Box:",
+        document.getElementById("quizBox")
+    );
+
+}
+
+</script>
+
+
+
+<script src="script.js" defer></script>
+
+
+
+</body>
+
+
+</html>

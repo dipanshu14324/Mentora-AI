@@ -1,0 +1,7 @@
+backend/.env
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+frontend/node_modules/
+chat_history.db
+vector_db/
