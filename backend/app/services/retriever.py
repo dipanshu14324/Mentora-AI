@@ -9,9 +9,23 @@ import os
 # Paths
 # =====================================
 
-USER_VECTOR_PATH = "app/vectordb"
+BASE_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(__file__))
+)
 
-DEFAULT_VECTOR_PATH = "app/vector_db"
+
+USER_VECTOR_PATH = os.path.join(
+    BASE_DIR,
+    "app",
+    "vectordb"
+)
+
+
+DEFAULT_VECTOR_PATH = os.path.join(
+    BASE_DIR,
+    "app",
+    "vector_db"
+)
 
 
 
