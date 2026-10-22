@@ -27,7 +27,7 @@ def get_retriever(user_id=None):
 
         embeddings = HuggingFaceEmbeddings(
 
-            model="sentence-transformers/all-MiniLM-L6-v2"
+            model_name="sentence-transformers/all-MiniLM-L6-v2"
 
         )
 
