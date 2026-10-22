@@ -33,11 +33,12 @@ app.include_router(history_router)
 # -------------------------
 
 app.add_middleware(
-
     CORSMiddleware,
 
     allow_origins=[
+        "https://mentora-ai-ruby.vercel.app",
         "https://mentora-q8i19my0b-team-veyronix.vercel.app",
+        "https://mentora-ai-git-main-team-veyronix.vercel.app",
         "http://localhost:5173",
         "http://127.0.0.1:5173"
     ],
@@ -46,8 +47,7 @@ app.add_middleware(
 
     allow_methods=["*"],
 
-    allow_headers=["*"]
-
+    allow_headers=["*"],
 )
 
 
