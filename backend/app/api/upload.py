@@ -6,8 +6,8 @@ import uuid
 import traceback
 
 
-from app.loaders.pdf_loader import load_pdf
-from app.services.embedding import create_vector_store
+
+
 
 
 router = APIRouter()
@@ -18,9 +18,23 @@ router = APIRouter()
 # Paths
 # =====================================
 
-UPLOAD_PATH = "app/uploads"
+BASE_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.dirname(__file__)
+    )
+)
 
-VECTOR_PATH = "app/vectordb"
+
+UPLOAD_PATH = os.path.join(
+    BASE_DIR,
+    "uploads"
+)
+
+
+VECTOR_PATH = os.path.join(
+    BASE_DIR,
+    "vectordb"
+)
 
 
 
@@ -191,10 +205,10 @@ async def upload_pdf(
         # =====================================
 
 
+        from app.loaders.pdf_loader import load_pdf
+
         documents = load_pdf(
-
             file_path
-
         )
 
 
@@ -226,7 +240,7 @@ async def upload_pdf(
         # Create FAISS Vector Store
         # =====================================
 
-
+        from app.services.embedding import create_vector_store
         vector_store = create_vector_store(
 
             documents,

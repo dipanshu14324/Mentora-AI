@@ -1,7 +1,7 @@
 import os
 
 from langchain_community.vectorstores import FAISS
-from langchain_ollama import OllamaEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
 
@@ -19,9 +19,9 @@ VECTOR_PATH = os.path.join(
 
 def get_embeddings():
 
-    return OllamaEmbeddings(
+    return HuggingFaceEmbeddings(
 
-        model="nomic-embed-text"
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
 
     )
 
