@@ -14,14 +14,20 @@ import numpy as np
 # Paths
 # ==========================
 
-POPPLER_PATH = r"C:\Users\DIPANSHU SHUKLA\Downloads\poppler\poppler-26.09.0\Library\bin"
+import platform
 
 
-TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+if platform.system() == "Windows":
 
+    POPPLER_PATH = r"C:\Users\DIPANSHU SHUKLA\Downloads\poppler\poppler-26.09.0\Library\bin"
 
+    TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+    pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+
+else:
+
+    POPPLER_PATH = None
 
 
 
@@ -37,15 +43,20 @@ def load_pdf(path):
 
 
 
-    pages = convert_from_path(
+    if POPPLER_PATH:
 
-        path,
+        pages = convert_from_path(
+            path,
+            dpi=300,
+            poppler_path=POPPLER_PATH
+        )
 
-        dpi=300,
-
-        poppler_path=POPPLER_PATH
-
-    )
+    else:
+    
+        pages = convert_from_path(
+            path,
+            dpi=300
+        )
 
 
 
