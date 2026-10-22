@@ -1,5 +1,5 @@
 from langchain_community.vectorstores import FAISS
-from langchain_ollama import OllamaEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 import os
 
@@ -25,9 +25,9 @@ def get_retriever(user_id=None):
     try:
 
 
-        embeddings = OllamaEmbeddings(
+        embeddings = HuggingFaceEmbeddings(
 
-            model="nomic-embed-text"
+            model="sentence-transformers/all-MiniLM-L6-v2"
 
         )
 
