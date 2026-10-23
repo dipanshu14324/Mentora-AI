@@ -6,7 +6,9 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 
 BASE_DIR = os.path.dirname(
-    os.path.dirname(__file__)
+    os.path.dirname(
+        os.path.dirname(__file__)
+    )
 )
 
 
