@@ -30,45 +30,37 @@ quiz_generator = QuizGenerator()
 
 
 
-# =====================================
+# ============================
 # Models
-# =====================================
+# ============================
 
 class ChatRequest(BaseModel):
 
-    user_id: str
+    user_id:str
 
-    session_id: str
+    session_id:str
 
-    question: str
+    question:str
 
-    level: str = "Beginner"
+    level:str="Beginner"
 
-    style: str = "Concept Learning"
+    style:str="Concept Learning"
 
 
 
 class RenameRequest(BaseModel):
 
-    title: str
+    title:str
 
 
 
 
-
-# =====================================
+# ============================
 # New Chat
-# =====================================
+# ============================
 
 @router.post("/new-chat")
 def new_chat(user_id:str):
-
-    if not user_id:
-
-        raise HTTPException(
-            status_code=400,
-            detail="User ID required"
-        )
 
 
     session_id = (
@@ -98,20 +90,19 @@ def new_chat(user_id:str):
 
 
 
+# ============================
+# NORMAL CHAT
+# ============================
 
-
-# =====================================
-# Normal Chat
-# =====================================
 
 @router.post("/chat")
-def chat(data: ChatRequest):
+def chat(data:ChatRequest):
 
 
-    print("====================")
+    print("======================")
     print("CHAT REQUEST")
     print(data)
-    print("====================")
+    print("======================")
 
 
     try:
@@ -135,6 +126,11 @@ def chat(data: ChatRequest):
         )
 
 
+        print("ANSWER:")
+        print(answer)
+
+
+
         rename_chat(
 
             data.session_id,
@@ -145,8 +141,6 @@ def chat(data: ChatRequest):
 
         )
 
-
-        print("ANSWER GENERATED")
 
         return {
 
@@ -159,13 +153,15 @@ def chat(data: ChatRequest):
     except Exception as e:
 
 
-        print("CHAT ERROR:")
+        print("======================")
+        print("CHAT ERROR")
         print(e)
-
 
         import traceback
 
         traceback.print_exc()
+
+        print("======================")
 
 
         raise HTTPException(
@@ -180,19 +176,16 @@ def chat(data: ChatRequest):
 
 
 
-
-# =====================================
-# Streaming Chat
-# =====================================
+# ============================
+# STREAM CHAT
+# ============================
 
 
 @router.post("/chat/stream")
 def chat_stream(data:ChatRequest):
 
 
-    print("STREAM REQUEST")
-
-    print(data)
+    print("STREAM START")
 
 
 
@@ -220,7 +213,6 @@ def chat_stream(data:ChatRequest):
                 data.question
             ):
 
-
                 yield chunk
 
 
@@ -236,17 +228,18 @@ def chat_stream(data:ChatRequest):
             )
 
 
+            print("STREAM DONE")
+
+
 
         except Exception as e:
 
 
-            print(
-                "STREAM ERROR:",
-                e
-            )
+            print("STREAM ERROR",e)
 
 
             yield "Unable to generate answer."
+
 
 
 
@@ -263,10 +256,10 @@ def chat_stream(data:ChatRequest):
 
 
 
-
-# =====================================
+# ============================
 # History
-# =====================================
+# ============================
+
 
 @router.get("/history/{user_id}")
 def history(user_id:str):
@@ -283,11 +276,10 @@ def history(user_id:str):
 
 
 
-
-
-# =====================================
+# ============================
 # Messages
-# =====================================
+# ============================
+
 
 @router.get("/messages/{session_id}")
 def messages(session_id:str):
@@ -295,21 +287,20 @@ def messages(session_id:str):
 
     return {
 
+
         "session_id":session_id,
 
-        "messages":
-        get_messages(session_id)
+        "messages":get_messages(session_id)
 
     }
 
 
 
 
+# ============================
+# Delete
+# ============================
 
-
-# =====================================
-# Delete Chat
-# =====================================
 
 @router.delete("/delete/{session_id}")
 def remove_chat(session_id:str):
@@ -327,12 +318,10 @@ def remove_chat(session_id:str):
 
 
 
-
-
-
-# =====================================
+# ============================
 # Rename
-# =====================================
+# ============================
+
 
 @router.put("/rename/{session_id}")
 def rename_chat_route(
@@ -352,7 +341,7 @@ def rename_chat_route(
 
     return {
 
-        "message":"Renamed successfully"
+        "message":"Renamed"
 
     }
 
@@ -360,11 +349,10 @@ def rename_chat_route(
 
 
 
-
-
-# =====================================
+# ============================
 # Flashcards
-# =====================================
+# ============================
+
 
 @router.post("/flashcards")
 def create_flashcards(data:dict):
@@ -387,11 +375,10 @@ def create_flashcards(data:dict):
 
 
 
-
-
-# =====================================
+# ============================
 # Quiz
-# =====================================
+# ============================
+
 
 @router.post("/quiz")
 def generate_quiz(data:dict):
