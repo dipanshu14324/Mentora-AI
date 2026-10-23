@@ -73,11 +73,15 @@ class MentoraTutor:
 
 
         except Exception as e:
+
+            import traceback
         
-            print(
-                "Retriever Error:",
-                e
-            )
+            print("==============================")
+            print("RETRIEVER ERROR")
+            traceback.print_exc()
+            print("==============================")
+        
+            return []
 
             self.retriever = None
 
@@ -262,50 +266,44 @@ class MentoraTutor:
     # Clean OCR Text
     # =====================================
 
-    def clean_text(
-        self,
-        text
-    ):
+    def clean_text(self, text):
 
-
+        if not text:
+            return ""
+    
+    
+        # Remove extra spaces
         text = re.sub(
-
             r"\s+",
-
             " ",
-
             text
-
         )
-
-
-
+    
+    
+        # Remove OCR garbage characters
         text = re.sub(
-
             r"[^\w\s.,:;!?()/%+\-=<>]",
-
             " ",
-
             text
-
         )
-
-        # remove very small garbage words
+    
+    
+        # Remove tiny useless words
         words = text.split()
-
-
+    
+    
         words = [
-            w for w in words
-            if len(w)>2
+            word 
+            for word in words
+            if len(word) > 2
         ]
-
-
+    
+    
         text = " ".join(words)
-
-
-
+    
+    
         return text.strip()
-
+    
 
 
 

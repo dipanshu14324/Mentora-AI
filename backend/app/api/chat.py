@@ -130,7 +130,7 @@ def chat(data: ChatRequest):
         )
 
 
-        answer = tutor.answer(
+        response = tutor.answer(
             data.question
         )
 
@@ -148,11 +148,7 @@ def chat(data: ChatRequest):
 
         print("ANSWER GENERATED")
 
-        return {
-
-            "answer":answer
-
-        }
+        return response
 
 
 

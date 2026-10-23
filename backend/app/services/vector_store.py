@@ -18,7 +18,7 @@ VECTOR_PATH = os.path.join(
 def get_embeddings():
 
     return HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
+        model_name="nomic-ai/nomic-embed-text-v1"
     )
 
 

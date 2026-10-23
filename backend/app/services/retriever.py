@@ -41,7 +41,7 @@ def get_retriever(user_id=None):
 
         embeddings = HuggingFaceEmbeddings(
 
-            model_name="sentence-transformers/all-MiniLM-L6-v2"
+            model_name="nomic-ai/nomic-embed-text-v1"
 
         )
 
@@ -56,32 +56,34 @@ def get_retriever(user_id=None):
 
         if user_id:
 
-
             user_path = os.path.join(
-
                 USER_VECTOR_PATH,
-
                 str(user_id)
-
-            )
-
-
-            print(
-                "Checking user vector:",
-                user_path
             )
 
 
             if os.path.isdir(user_path):
+            
+                faiss_file = os.path.join(
+                    user_path,
+                    "index.faiss"
+                )
 
+                pkl_file = os.path.join(
+                    user_path,
+                    "index.pkl"
+                )
 
-                faiss_file = os.path.join(user_path, "index.faiss")
-                pkl_file = os.path.join(user_path, "index.pkl")
 
                 if os.path.exists(faiss_file) and os.path.exists(pkl_file):
+                
+                    print("User PDF DB found")
+
                     vector_path = user_path
 
-
+                else:
+                
+                    print("User DB incomplete")
 
         # -----------------------------
         # Select Database
@@ -135,12 +137,12 @@ def get_retriever(user_id=None):
 
 
         retriever = db.as_retriever(
-            search_type="similarity_score_threshold",
+            search_type="similarity",
             search_kwargs={
 
-                "k":3,
+                "k":5,
 
-                "score_threshold":0.5
+                
 
             }
 
