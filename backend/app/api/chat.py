@@ -510,3 +510,46 @@ def generate_quiz(data:dict):
         questions
 
     }
+
+    @router.post("/chat")
+    async def chat(request: ChatRequest):
+    
+        print("====================")
+        print("CHAT REQUEST")
+        print(request)
+        print("====================")
+    
+        try:
+        
+            tutor = MentoraTutor(
+                request.session_id
+            )
+    
+    
+            answer = tutor.answer(
+                request.question
+            )
+    
+    
+            print("ANSWER GENERATED")
+            print(answer)
+    
+    
+            return {
+                "answer":answer
+            }
+    
+    
+        except Exception as e:
+        
+            print("====================")
+            print("CHAT ERROR")
+            print(e)
+            import traceback
+            traceback.print_exc()
+            print("====================")
+    
+    
+            return {
+                "error":str(e)
+            }
